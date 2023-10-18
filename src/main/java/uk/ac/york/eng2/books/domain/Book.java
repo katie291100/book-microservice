@@ -1,17 +1,17 @@
 package uk.ac.york.eng2.books.domain;
 
-import io.micronaut.data.annotation.GeneratedValue;
 import io.micronaut.serde.annotation.Serdeable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
-@Entity
 @Serdeable
+@Entity
 public class Book {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue()
 	private Long id;
 	
 	@Column(nullable=false)
@@ -20,9 +20,6 @@ public class Book {
 	@Column(nullable=false)
 	private Integer year;
 
-	public Book() {
-		// empty constructor
-	}
 	
 	public Long getId() {
 		return id;
