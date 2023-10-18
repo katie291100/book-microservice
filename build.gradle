@@ -13,18 +13,37 @@ repositories {
 }
 
 dependencies {
-    annotationProcessor("io.micronaut.data:micronaut-data-processor")
-    annotationProcessor("io.micronaut:micronaut-http-validation")
-    annotationProcessor("io.micronaut.serde:micronaut-serde-processor")
-    implementation("io.micronaut.data:micronaut-data-hibernate-jpa")
-    implementation("io.micronaut.kafka:micronaut-kafka")
-    implementation("io.micronaut.kafka:micronaut-kafka-streams")
     implementation("io.micronaut.serde:micronaut-serde-jackson")
+
+    // HTTP request validation
+    annotationProcessor("io.micronaut:micronaut-http-validation")
+
+    // Data mapping via Hibernate and JPA to a MariaDB database
+    annotationProcessor("io.micronaut.data:micronaut-data-processor")
+    implementation("io.micronaut.data:micronaut-data-hibernate-jpa")
     implementation("io.micronaut.sql:micronaut-jdbc-hikari")
-    compileOnly("io.micronaut:micronaut-http-client")
-    runtimeOnly("ch.qos.logback:logback-classic")
+    implementation("io.micronaut.sql:micronaut-hibernate-jpa")
+    implementation("jakarta.annotation:jakarta.annotation-api")
     runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
-    testImplementation("io.micronaut:micronaut-http-client")
+
+    // Declarative HTTP client and circuit breaker
+    implementation("io.micronaut:micronaut-http-client")
+
+    // Basic Kafka support
+    implementation("io.micronaut.kafka:micronaut-kafka")
+
+    // Kafka Streams support (requires having at least one stream, or build will fail)
+    implementation("io.micronaut.kafka:micronaut-kafka-streams")
+
+    // Logging via Logback
+    runtimeOnly("ch.qos.logback:logback-classic")
+	runtimeOnly("org.yaml:snakeyaml")
+    // Type hints for native-image
+    annotationProcessor("io.micronaut:micronaut-graal")
+    compileOnly("org.graalvm.nativeimage:svm")
+
+    // Caching and any other useful data structures
+    implementation("com.google.guava:guava:32.1.2-jre")
 }
 
 
@@ -32,8 +51,8 @@ application {
     mainClass.set("uk.ac.york.eng2.books.Application")
 }
 java {
-    sourceCompatibility = JavaVersion.toVersion("11")
-    targetCompatibility = JavaVersion.toVersion("11")
+    sourceCompatibility = JavaVersion.toVersion("17")
+    targetCompatibility = JavaVersion.toVersion("17")
 }
 
 graalvmNative.toolchainDetection = false
