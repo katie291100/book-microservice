@@ -25,6 +25,7 @@ dependencies {
     implementation("io.micronaut.sql:micronaut-hibernate-jpa")
     implementation("jakarta.annotation:jakarta.annotation-api")
     runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
+	implementation("javax.persistence:javax.persistence-api:2.2")
 
     // Declarative HTTP client and circuit breaker
     implementation("io.micronaut:micronaut-http-client")

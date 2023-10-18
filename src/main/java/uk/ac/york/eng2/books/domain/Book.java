@@ -15,11 +15,15 @@ public class Book {
 	private Long id;
 	
 	@Column(nullable=false)
-	private String name;
+	private String title;
 
 	@Column(nullable=false)
 	private Integer year;
 
+	public Book() {
+		// empty constructor
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -28,12 +32,12 @@ public class Book {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public Integer getYear() {
